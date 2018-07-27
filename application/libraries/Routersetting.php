@@ -16,7 +16,7 @@ class Routersetting{
 				$this->host = $this->ci->m_mikrotik->config('MIKROTIK_HOST')['value'];
 				$this->user = $this->ci->m_mikrotik->config('MIKROTIK_USER')['value'];
 				$this->pass = $this->ci->m_mikrotik->config('MIKROTIK_PASS')['value'];
-				$this->ci->session->set_flashdata('TITLE', $this->ci->m_mikrotik->config('TITLE')['value']);
+				$this->ci->session->set_flashdata('TITLE', $this->datatitle());
 				if($this->check_connect()){
 					return true;
 				}else{
@@ -27,6 +27,16 @@ class Routersetting{
 				echo 'Silakan setting konfirguasi Mikrotik terlebih dahulu <a href="'.base_url('setup').'">Click Here</a>';
 				die();
 			}
+		}
+	}
+	
+	function datatitle()
+	{
+		if($this->ci->routerosapi->connect($this->host, $this->user, $this->pass)){
+			$title = $this->ci->m_mikrotik->select_api('/system/identity/print');
+			return $title[0]['name'];
+		}else{
+			return false;
 		}
 	}
 	
@@ -46,6 +56,13 @@ class Routersetting{
 		}else{
 			return false;
 		}
+	}
+	
+	function formatDateTime($dtm)
+	{
+		$val_conver = $dtm; 
+		$new_format = str_replace("s", "s", str_replace("m", "m ", str_replace("h", "h ", str_replace("d", "d ", str_replace("w", "w ", $val_conver)))));
+		return $new_format;
 	}
 }
 ?>

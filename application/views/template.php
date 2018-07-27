@@ -148,7 +148,7 @@
     <script src="<?php echo base_url(); ?>assets/plugin/datatables/js/jquery.dataTables.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugin/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets/plugin/datatables-responsive/dataTables.responsive.js"></script>
-
+	<script src="<?php echo base_url(); ?>assets/plugin/datatables/js/dataTables.buttons.min.js"></script>
     <!-- Custom Theme JavaScript -->
     <script src="<?php echo base_url(); ?>assets/dist/js/sb-admin-2.js"></script>
 

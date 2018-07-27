@@ -15,7 +15,9 @@ class Welcome extends CI_Controller {
 			'hotspot_count' => count($this->m_mikrotik->select_api('/ip/hotspot/user/print')) - 1,
 			'ppp_count' => count($this->m_mikrotik->select_api('/ppp/secret/print')),
 			'count_mountly' => $this->m_mikrotik->count_monthly(),
-			'count_total' => (count($this->m_mikrotik->select_api('/ip/hotspot/user/print')) - 1) + count($this->m_mikrotik->select_api('/ppp/secret/print'))
+			'count_total' => (count($this->m_mikrotik->select_api('/ip/hotspot/user/print')) - 1) + count($this->m_mikrotik->select_api('/ppp/secret/print')),
+			'hotspot_active' => count($this->m_mikrotik->select_api('/ip/hotspot/active/print')),
+			'ppp_active' => count($this->m_mikrotik->select_api('/ppp/active/print'))
 		);
 		$this->template->load('template', 'dashboard', $dataDashboard);
 	}
@@ -118,27 +120,31 @@ class Welcome extends CI_Controller {
 
 	public function server()
 	{
+		$this->load->library('formatbytes');
 		$results = $this->m_mikrotik->select_api('/system/resource/print');
-		$arr = array();
-		foreach($results as $result){
-			$freeHdd = number_format($result['free-hdd-space']/1024000, 2);
-			$totaleHdd = number_format($result['total-hdd-space']/1024000, 2);
-			$freeMemory = number_format($result['free-memory']/1024000, 2);
-			$totalMemory = number_format($result['total-memory']/1024000, 2);
-			$arr = array(
-				'uptime' => $result['uptime'],
-				'cpu_load' => $result['cpu-load'].'%',
-				'cpu_count' => $result['cpu-count'],
-				'cpu_frequency' => $result['cpu-frequency'],
-				'cpu' => $result['cpu'],
-				'free_hdd_space' => $freeHdd.' Mib',
-				'total_hdd_space' => $totaleHdd.' Mib',
-				'free_memory' => $freeMemory.' Mib',
-				'total_memory' => $totalMemory.' Mib',
-				'version' => $result['version']
-			);
-		}
+		$result = $results[0];
+		$resultsRouter = $this->m_mikrotik->select_api('/system/routerboard/print');
+		$resultRouter = $resultsRouter[0];
+		$arr = array(
+			'uptime' => $this->routersetting->formatDateTime($result['uptime']),
+			'cpu_load' => $result['cpu-load'].'%',
+			'board_name' => $resultRouter['board-name'],
+			'model' => $resultRouter['model'],
+			'cpu' => $result['cpu'],
+			'free_hdd_space' => $this->formatbytes->convert($result['free-hdd-space']),
+			'total_hdd_space' => $this->formatbytes->convert($result['total-hdd-space']),
+			'free_memory' => $this->formatbytes->convert($result['free-memory']),
+			'total_memory' => $this->formatbytes->convert($result['total-memory']),
+			'version' => $result['version']
+		);
 		echo json_encode($arr);
+	}
+	
+	public function cek_log()
+	{
+		$result = $this->m_mikrotik->select_api("/log/print", array(
+    "?topics" => "hotspot,info",));
+		echo json_encode($result);
 	}
 	
 	//percobaan

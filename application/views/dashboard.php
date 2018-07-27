@@ -1,10 +1,5 @@
 <div id="page-wrapper">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="page-header">Dashboard</h1>
-                </div>
-                <!-- /.col-lg-12 -->
-            </div>
+	<br />
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-3 col-md-6">
@@ -99,27 +94,69 @@
             <!-- /.row -->
             <div class="row">
                 <div class="col-lg-8">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Chart By Month
+                	<div class="row">
+                    	<div class="col-lg-6 col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-user fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><?php echo $hotspot_active; ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="panel-footer">
+                                        <span class="pull-left">Hotspot Active</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                            </div>
                         </div>
-                        <!-- /.panel-heading -->
-                        <div class="panel-body">
-                            <div id="morris-area-chart"></div>
+                        <div class="col-lg-6 col-md-3">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge"><?php echo $ppp_active; ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class="panel-footer">
+                                        <span class="pull-left">PPP Active</span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                            </div>
                         </div>
-                        <!-- /.panel-body -->
                     </div>
-                    <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Chart Total User
+                   	<div class="row">
+                    	<div class="col-lg-12">
+                        	<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Chart
+                            </div>
+                            <div class="panel-body">
+                            	
+                                    <ul class="nav nav-tabs" role="tablist">
+                                      <li class="nav-item">
+                                        <a class="nav-link active" href="#area" role="tab" data-toggle="tab">Area Chart</a>
+                                      </li>
+                                      <li class="nav-item">
+                                        <a class="nav-link" href="#donuts" role="tab" data-toggle="tab">Donats Chart</a>
+                                      </li>
+                                    </ul>
+                                    <div class="tab-content">
+                                      <div role="tabpanel" class="tab-pane fade in active" id="area"><div id="morris-area-chart"></div></div>
+                                      <div role="tabpanel" class="tab-pane fade in active" id="donuts"><div id="morris-donut-chart"></div></div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="panel-body">
-                            <div id="morris-donut-chart"></div>
-                        </div>
-                        <!-- /.panel-body -->
                     </div>
-                    <!-- Donut Panel -->
+                    
                 </div>
                 <!-- /.col-lg-8 -->
                 <div class="col-lg-4">
@@ -141,8 +178,8 @@
                                     </span>
                                 </a>
                                 <a href=".#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> CPU Count
-                                    <span class="pull-right text-muted small"><em id="cpu_count"></em>
+                                    <i class="fa fa-tasks fa-fw"></i> Board Name
+                                    <span class="pull-right text-muted small"><em id="board_name"></em>
                                     </span>
                                 </a>
                                 <a href=".#" class="list-group-item">
@@ -151,8 +188,8 @@
                                     </span>
                                 </a>
                                 <a href=".#" class="list-group-item">
-                                    <i class="fa fa-tasks fa-fw"></i> CPU Frequency
-                                    <span class="pull-right text-muted small"><em id="cpu_frequency"></em>
+                                    <i class="fa fa-tasks fa-fw"></i> Model
+                                    <span class="pull-right text-muted small"><em id="model"></em>
                                     </span>
                                 </a>
                                 <a href=".#" class="list-group-item">

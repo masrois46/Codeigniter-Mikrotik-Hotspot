@@ -58,5 +58,28 @@ class M_mikrotik extends CI_Model{
 		$this->db->where(array('type' => $type, 'user' => $user));
 		return $this->db->get('user');
 	}
+	
+	function syncronize($data = array()){
+		$cek = $this->db->get_where('user', array('user' => $data['user']))->num_rows();
+		if($cek > 0){
+			return false;
+		}else{
+			$this->db->set($data);
+			$this->db->insert('user');
+			return true;
+		}
+	}
+	
+	function edit_user_hotspot($data = array()){
+		$this->db->set($data);
+		$this->db->where('user', $data['user']);
+		$this->db->update('user');
+		return true;
+	}
+	
+	function delete_user_hotspot($user){
+		$this->db->where('user', $user);
+		return $this->db->delete('user');
+	}
 }
 ?>

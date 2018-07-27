@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.7.9
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 21 Jul 2018 pada 12.09
--- Versi server: 10.1.34-MariaDB
--- Versi PHP: 7.1.19
+-- Host: 127.0.0.1:3306
+-- Waktu pembuatan: 27 Jul 2018 pada 10.39
+-- Versi server: 5.7.21
+-- Versi PHP: 5.6.35
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,11 +28,20 @@ SET time_zone = "+00:00";
 -- Struktur dari tabel `admin`
 --
 
-CREATE TABLE `admin` (
+DROP TABLE IF EXISTS `admin`;
+CREATE TABLE IF NOT EXISTS `admin` (
   `username` varchar(50) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `nama` varchar(150) NOT NULL
+  `nama` varchar(150) NOT NULL,
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `admin`
+--
+
+INSERT INTO `admin` (`username`, `password`, `nama`) VALUES
+('admin', 'c3284d0f94606de1fd2af172aba15bf3', '');
 
 -- --------------------------------------------------------
 
@@ -40,9 +49,11 @@ CREATE TABLE `admin` (
 -- Struktur dari tabel `config`
 --
 
-CREATE TABLE `config` (
+DROP TABLE IF EXISTS `config`;
+CREATE TABLE IF NOT EXISTS `config` (
   `key` varchar(50) NOT NULL,
-  `value` varchar(255) NOT NULL
+  `value` varchar(255) NOT NULL,
+  PRIMARY KEY (`key`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -50,10 +61,9 @@ CREATE TABLE `config` (
 --
 
 INSERT INTO `config` (`key`, `value`) VALUES
-('MIKROTIK_HOST', ''),
-('MIKROTIK_PASS', ''),
-('MIKROTIK_USER', ''),
-('TITLE', 'Rois Hotspot');
+('MIKROTIK_HOST', '192.168.1.2'),
+('MIKROTIK_PASS', '01012012'),
+('MIKROTIK_USER', 'admin');
 
 -- --------------------------------------------------------
 
@@ -61,12 +71,14 @@ INSERT INTO `config` (`key`, `value`) VALUES
 -- Struktur dari tabel `user`
 --
 
-CREATE TABLE `user` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE IF NOT EXISTS `user` (
   `user` varchar(50) NOT NULL,
   `type` enum('hotspot','ppp') NOT NULL,
   `registered` int(11) NOT NULL,
   `expired` int(11) NOT NULL,
-  `chart` date NOT NULL
+  `chart` date NOT NULL,
+  PRIMARY KEY (`user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -74,30 +86,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user`, `type`, `registered`, `expired`, `chart`) VALUES
-('coba', 'hotspot', 1529445600, 1532124000, '2018-04-11'),
-('user1', 'hotspot', 1529445600, 1531692000, '2018-07-19');
-
---
--- Indexes for dumped tables
---
-
---
--- Indeks untuk tabel `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indeks untuk tabel `config`
---
-ALTER TABLE `config`
-  ADD PRIMARY KEY (`key`);
-
---
--- Indeks untuk tabel `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user`);
+('kdaforex', 'hotspot', 1530403200, 1532995200, '2018-07-01');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
