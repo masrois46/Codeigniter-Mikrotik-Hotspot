@@ -157,9 +157,5 @@ class Hotspot extends CI_Controller{
 			
 		}
 	}
-
-	function datec($a){
-		echo strtotime($a);
-	}
 }
 ?>
